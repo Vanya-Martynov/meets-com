@@ -19,7 +19,7 @@ export class UserPhotoComponent implements OnInit {
     let reader  = new FileReader();
 
     reader.addEventListener("load", function () {
-      img.src = reader.result;
+      img.setAttribute('src', reader.result);
     }, false);
 
     if (this.file) {
