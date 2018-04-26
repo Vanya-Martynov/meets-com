@@ -1,0 +1,76 @@
+<body>
+
+<div id="login" class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-xs-12 text-center" >
+        <img src="../../assets/img-login/logo.png" class="img-fluid logo-meets" alt="picture"/></div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center h2">Enter your Verification Code</div>
+      <div class="col-md-12 text-center text-muted">We sent you a five-digit code on your phone</div>
+    </div>
+  </div>
+  <div class="container">
+    <form>
+      <div class="row text-center my-verification">
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" id="firstNumber">
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" id="secondNumber">
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" id="thirdNumber">
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" id="fourthNumber">
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" id="fiveNumber">
+        </div>
+      </div>
+
+      <div class="col-md-12 text-center">
+        <span *ngIf="timerActive">00:<span *ngIf="lowerThanTen">0</span>{{time.seconds}}</span>
+        <div *ngIf="timerActive" class="text-muted mb-3">Recent Code</div>
+        <img *ngIf="!timerActive" src="../../assets/img-login/time_icon.png" height="23" width="30"/>
+        <div *ngIf="!timerActive" class="text-primary mb-3">Recent Code</div>
+      </div>
+      <div class="clearfix"></div>
+
+    </form>
+    <div class="text-center btn-login">
+      <button type="button" class="btn btn-default text-center my-buttons my-button-login" routerLink="/gender">Next</button>
+    </div>
+
+
+
+
+
+
+  </div >
+  <div class="container fixed-bottom my-bottom">
+    <div class="text-center text-muted">Already have an account? <a routerLink="/login">Login</a></div>
+    <div class="container text-center">
+      <a routerLink="/" class="text-center">Cancel</a>
+    </div>
+  </div>
+
+
+</div>
+
+
+</body>
+
+
+
+
+
+
+
+
+

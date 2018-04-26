@@ -1,0 +1,83 @@
+<body>
+
+<div id="login" class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-xs-12 text-center" >
+        <img src="../../assets/img-login/logo.png" class="img-fluid logo-meets" alt="picture"/></div>
+    </div>
+    <div class="row buttons-email-phone">
+      <div class="col-md-6 col-sm-4 col-xs-11">
+        <button class="btn btn-default float-right my-buttons my-button-active" (click)="showEmail($event)" id="buttonEmail"><img src="http://s1.iconbird.com/ico/2013/1/569/w24h16138981479618envelope.png" class="turtle" alt="" > Email</button>
+      </div>
+      <div class="col-md-6 col-sm-8 col-xs-1">
+        <button class="btn btn-default my-buttons btn-primary my-button-muted" (click)="showPhone()" id="buttonPhone"><img src="http://s1.iconbird.com/ico/2014/1/622/w26h261390854463phone26.png" class="turtle" alt=""> Phone</button>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <form>
+      <div class="form-group" *ngIf="emailOrPhone.email">
+        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+      </div>
+      <div class="row">
+        <div class="col-md-2" *ngIf="emailOrPhone.phone">
+          <select class="form-control" id="sel1">
+            <option>+375</option>
+            <option>+7</option>
+            <option>+124</option>
+            <option>+11</option>
+          </select>
+        </div>
+        <div class="form-group col-md-10" *ngIf="emailOrPhone.phone">
+          <input type="text" class="form-control" id="inputPhone" placeholder="Phone">
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="emailOrPhone.email">
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      </div>
+      <div class="form-group" *ngIf="emailOrPhone.email">
+        <input type="password" class="form-control" id="userConfirmPassword" placeholder="Confirm Password">
+      </div>
+      <button type="button" class="float-right btn btn-link">Forgot your password?</button>
+      <div class="clearfix"></div>
+
+    </form>
+    <div class="text-center btn-login">
+      <button type="button" class="btn btn-default text-center my-buttons my-button-login" routerLink="/verification">Next</button>
+    </div>
+
+
+
+
+
+
+  </div >
+  <div class="container fixed-bottom my-bottom">
+    <div class="text-center text-muted">Already have an account? <a routerLink="/login">Login</a></div>
+    <div class="container text-center">
+      <a routerLink="/" class="text-center">Cancel</a>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+</div>
+
+
+</body>
+
+
+
+
+
+
+
+
+
