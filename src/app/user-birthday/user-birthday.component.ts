@@ -8,34 +8,20 @@ import { Component, OnInit } from '@angular/core';
 export class UserBirthdayComponent implements OnInit {
 
 
-  emailOrPhone = {
-    email: true,
-    phone: false,
+  userBirthday = {
+    age: 0,
+    display: false
   };
-
-
-  showEmail(e){
-    this.emailOrPhone.email = true;
-    this.emailOrPhone.phone = false;
-    let buttonEmail = document.getElementById('buttonEmail');
-    buttonEmail.classList.remove('my-button-muted');
-    buttonEmail.classList.add('my-button-active');
-
-    let buttonPhone = document.getElementById('buttonPhone');
-    buttonPhone.classList.add('my-button-muted');
-    buttonPhone.classList.remove('my-button-active');
-  }
-
-  showPhone(){
-    this.emailOrPhone.phone = true;
-    this.emailOrPhone.email = false;
-    let buttonPhone = document.getElementById('buttonPhone');
-    buttonPhone.classList.remove('my-button-muted');
-    buttonPhone.classList.add('my-button-active');
-
-    let buttonEmail = document.getElementById('buttonEmail');
-    buttonEmail.classList.add('my-button-muted');
-    buttonEmail.classList.remove('my-button-active');
+  getUserAge(){
+    let inputValue = (<HTMLInputElement>document.getElementById('userBirthday')).value;
+    let userAge = new Date(inputValue).getTime();
+    let minutes = 1000 * 60;
+    let hours = minutes * 60;
+    let days = hours * 24;
+    let years = days * 365;
+    let timeRightNow = new Date().getTime();
+    this.userBirthday.age = Math.round((timeRightNow - userAge)/years);
+    this.userBirthday.display = true;
   }
 
   constructor() { }

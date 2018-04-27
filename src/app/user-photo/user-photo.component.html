@@ -20,14 +20,10 @@
       <div class="file-field">
         <div class="mb-4 text-center">
           <img src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg" class="rounded z-depth-1-half avatar-pic" id="userPhoto">
+          <span class="btn btn-default btn-file">
+            <img src="../../assets/img-login/signs.png" height="25" width="25" class="rounded-circle"/><input name="file" type="file" class="input-file" (change)="onChange($event)"/>
+          </span>
         </div>
-        <div class="d-flex justify-content-center">
-
-          <div class="file-path-wrapper">
-            <input name="file" type="file" class="input-file" (change)="onChange($event)"/>
-          </div>
-        </div>
-
       </div>
     </form>
   </div >

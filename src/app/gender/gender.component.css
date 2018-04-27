@@ -9,7 +9,7 @@ html, body{
 }
 #login{
 
-  height: 50em;
+  height: 99vh;
   background-image: url("../../assets/img-login/R767R_croper_ru.png");
   background-size: 100%;
   background-repeat: no-repeat;
@@ -61,6 +61,7 @@ html, body{
   background: #3079C4;
 }
 .my-bottom{
+  box-sizing: border-box;
   padding-bottom: 30px;
 }
 .my-male-icons{

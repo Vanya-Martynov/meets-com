@@ -9,7 +9,7 @@ html, body{
 }
 #login{
 
-  height: 50em;
+  height: 99vh;
   background-image: url("../../assets/img-login/R767R_croper_ru.png");
   background-size: 100%;
   background-repeat: no-repeat;
@@ -69,4 +69,27 @@ html, body{
 }
 .avatar-pic{
   width: 150px;
+}
+.btn-file {
+  position: absolute;
+  box-sizing: border-box;
+  z-index: 10;
+  margin-left: -38px;
+  padding-top: 122px;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
 }

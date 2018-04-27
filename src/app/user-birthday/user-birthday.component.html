@@ -17,8 +17,9 @@
   <div class="container">
     <form>
       <div class="form-group">
-        <input type="date" class="form-control mt-5 mb-5" id="userLocation">
+        <input type="date" class="form-control mt-5 mb-3" id="userBirthday" (change)="getUserAge()">
       </div>
+      <div class="text-muted text-center" *ngIf="userBirthday.display">Are you {{userBirthday.age}} years old?</div>
       <div class="clearfix"></div>
     </form>
   </div >
