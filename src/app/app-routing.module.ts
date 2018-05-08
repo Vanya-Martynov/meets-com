@@ -10,6 +10,8 @@ import { UserNameComponent } from "./user-name/user-name.component";
 import { UserBirthdayComponent } from "./user-birthday/user-birthday.component";
 import { UserPhoneComponent } from "./user-phone/user-phone.component";
 import { UserPhotoComponent } from "./user-photo/user-photo.component";
+import { EmailLinkComponent } from "./email-link/email-link.component";
+import { ProfileComponent } from "./profile/profile.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginMeetsComComponent },
@@ -21,6 +23,8 @@ const routes: Routes = [
   { path: 'birthday', component: UserBirthdayComponent },
   { path: 'phone-number', component: UserPhoneComponent },
   { path: 'photo', component: UserPhotoComponent },
+  { path: 'email_verification', component: EmailLinkComponent},
+  { path: 'profile', component: ProfileComponent},
 ];
 @NgModule({
   exports: [ RouterModule ],

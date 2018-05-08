@@ -20,6 +20,14 @@ import { UserPhotoComponent } from './user-photo/user-photo.component';
 
 import {MatCardModule} from '@angular/material/card';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { EmailLinkComponent } from './email-link/email-link.component';
+import { ProfileComponent } from './profile/profile.component';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material';
 
 
 @NgModule({
@@ -33,7 +41,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     UserNameComponent,
     UserBirthdayComponent,
     UserPhoneComponent,
-    UserPhotoComponent
+    UserPhotoComponent,
+    EmailLinkComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +55,12 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     BrowserAnimationsModule,
     MatProgressBarModule,
     MatCardModule,
+    MatChipsModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
+    MatSelectModule,
+    MatInputModule,
   ],
   providers: [IpService],
   bootstrap: [AppComponent]

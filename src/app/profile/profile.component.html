@@ -1,0 +1,242 @@
+
+
+<div class="container">
+  <div class="row bg-primary">
+    <div class="col-md-12 text-white" >
+      <div class="float-left">
+        <img src="../../assets/img-login/back.png" height="20px" alt="" class="mt-3 mb-3">
+      </div>
+      <div class="float-right mt-3 mb-3">Preview</div>
+      <div class="text-center mt-3 mb-3">Edit Profile</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 text-center mt-3 mb-3">
+      <img src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg" class="rounded z-depth-1-half" id="serPhoto" height="200px">
+    </div>
+  </div>
+  <div class="row mb-3" >
+    <div class="col-md-2" *ngFor="let src of userPhotos">
+      <img src="{{src}}" alt="" class="rounded z-depth-1-half avatar-pic">
+    </div>
+    <div class="col-md-2">
+      <div class="container">
+        <form class="md-form">
+          <div class="file-field">
+            <div class="text-center">
+              <img src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg" class="rounded z-depth-1-half avatar-pic" id="userPhoto">
+              <span class="btn btn-default btn-file float">
+                <img src="../../assets/img-login/signs.png" class="rounded-circle addPhotoImg"/><input name="file" type="file" class="input-file" (change)="onChange($event)"/>
+              </span>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 pt-3 my-borders mb-3">
+      <div class="float-left text-uppercase font-weight-bold">Name</div>
+
+      <div class="float-right">
+        <button class="btn btn-link noUnderline" (click)="onClickShowInputName()">
+        <div class="text-muted">
+          {{name}}
+            <img src="../../assets/img-login/next.png" height="18" width="18"/>
+        </div>
+        </button>
+        <mat-form-field appearance="legacy" *ngIf="isChangingName">
+          <input matInput placeholder="Change your Name" id="changeName" (change)="onChangeName()">
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div class="row my-borders pt-3 pb-2">
+    <div class="col-md-12 float-left text-uppercase font-weight-bold">About Me</div>
+  </div>
+
+  <div class="row mb-3" (click)="onClickShowInputBiography()">
+    <div class="text-muted col-md-12">
+      <span *ngIf="!isChangingBiography">
+        {{userBiography}}
+      </span>
+        <mat-form-field *ngIf="isChangingBiography" class="text-muted col-md-12">
+          <textarea matInput value="{{userBiography}}" (change)="onChangeUserBiography()" id="userBiography"></textarea>
+        </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row pt-3 my-borders mb-3">
+    <div class="col-md-12 float-left text-uppercase font-weight-bold">Interests</div>
+    <div *ngFor="let userInterest of userInterests" class="row userInterests ml-2 mr-2 pl-2 pr-2 mt-1" (click)="deleteUserInterest($event)" [attr.data-target]="userInterest.indexInAllInterests">
+      {{userInterest.interest}}
+    </div>
+    <button class="float-right btn btn-link" (click)="onClickShowInterests()">Add interest</button>
+
+  </div>
+  <div id="addInterest" class="mb-4 scroll-items" *ngIf="isAddingInterests" (click)="addInterest($event)">
+    <div class="hover-set-color pl-2 border-1" *ngFor="let interest of allInterests">{{interest}}</div>
+  </div>
+
+  <div class="row pt-3 my-borders mb-3">
+    <div class="col-md-12">
+      <div class="float-left text-uppercase font-weight-bold">Language</div>
+      <div class="float-right">
+
+        <div class="text-muted float-right">
+          <span *ngFor="let userLanguage of userLanguages" (click)="deleteUserLanguage($event)" class="pr-1">{{userLanguage.language}}</span>
+          <span *ngIf="userLanguages.length === 0" (click)="onClickShowAllLanguages()">Not Selected</span>
+          <img src="../../assets/img-login/next.png" height="18" width="18" (click)="onClickShowAllLanguages()"/>
+          <div id="addLanguage" class="mb-4 scroll-items" *ngIf="isAddingLanguage" (click)="addLanguage($event)">
+            <div class="hover-set-color pl-2 border-1" *ngFor="let userLanguage of allLanguages">{{userLanguage}}</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row pt-3 my-borders mb-3">
+    <div class="col-md-12">
+      <div class="float-left text-uppercase font-weight-bold">Height</div>
+      <div class="float-right">
+        <div class="text-muted float-right">
+
+          <div class="text-muted float-right">
+            <span class="pr-1">{{userHeight}}</span>
+            <span *ngIf="userHeight.length === 0" (click)="onClickShowAllHeights()">Not Selected</span>
+            <img src="../../assets/img-login/next.png" height="18" width="18" (click)="onClickShowAllHeights()"/>
+            <div id="addHeight" class="mb-4 scroll-items" *ngIf="isAddingHeight" (click)="addHeight($event)">
+              <div class="hover-set-color pl-2 border-1" *ngFor="let userHeight of allHeights">{{userHeight}}</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row pt-3 my-borders mb-3">
+    <div class="col-md-12">
+      <div class="float-left text-uppercase font-weight-bold">Weight</div>
+      <div class="float-right">
+        <div class="text-muted float-right">
+
+          <div class="text-muted float-right">
+            <span class="pr-1">{{userWeight}}</span>
+            <span *ngIf="userWeight.length === 0" (click)="onClickShowAllWeights()">Not Selected</span>
+            <img src="../../assets/img-login/next.png" height="18" width="18" (click)="onClickShowAllWeights()"/>
+            <div id="addWeight" class="mb-4 scroll-items" *ngIf="isAddingWeight" (click)="addWeight($event)">
+              <div class="hover-set-color pl-2 border-1" *ngFor="let userWeight of allWeights">{{userWeight}}</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row pt-3 my-borders mb-3">
+    <div class="col-md-12">
+      <div class="float-left text-uppercase font-weight-bold">Body Type</div>
+      <div class="float-right">
+        <div class="text-muted float-right">
+
+          <div class="text-muted float-right">
+            <span class="pr-1">{{userBodyType}}</span>
+            <span *ngIf="userBodyType.length === 0" (click)="onClickShowAllBodyTypes()">Not Selected</span>
+            <img src="../../assets/img-login/next.png" height="18" width="18" (click)="onClickShowAllBodyTypes()"/>
+            <div id="addBodyType" class="mb-4 scroll-items" *ngIf="isAddingBodyType" (click)="addBodyType($event)">
+              <div class="hover-set-color pl-2 border-1" *ngFor="let userHeight of allBodyTypes">{{userHeight}}</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row pt-3 my-borders mb-3">
+    <div class="col-md-12">
+      <div class="float-left text-uppercase font-weight-bold">Eye Color</div>
+      <div class="float-right">
+        <div class="text-muted float-right">
+
+          <div class="text-muted float-right">
+            <span class="pr-1">{{userEyeColor}}</span>
+            <span *ngIf="userEyeColor.length === 0" (click)="onClickShowAllEyeColors()">Not Selected</span>
+            <img src="../../assets/img-login/next.png" height="18" width="18" (click)="onClickShowAllEyeColors()"/>
+            <div id="addEyeColor" class="mb-4 scroll-items" *ngIf="isAddingEyeColor" (click)="addEyeColor($event)">
+              <div class="hover-set-color pl-2 border-1" *ngFor="let eyeColor of allEyeColors">{{eyeColor}}</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row pt-3 my-borders mb-3">
+    <div class="col-md-12">
+      <div class="float-left text-uppercase font-weight-bold">Hair Color</div>
+      <div class="float-right">
+        <div class="text-muted float-right">
+
+          <div class="text-muted float-right">
+            <span class="pr-1">{{userHairColor}}</span>
+            <span *ngIf="userHairColor.length === 0" (click)="onClickShowAllHairColors()">Not Selected</span>
+            <img src="../../assets/img-login/next.png" height="18" width="18" (click)="onClickShowAllHairColors()"/>
+            <div id="addHairColor" class="mb-4 scroll-items" *ngIf="isAddingHairColor" (click)="addHairColor($event)">
+              <div class="hover-set-color pl-2 border-1" *ngFor="let allHairColor of allHairColors">{{allHairColor}}</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row pt-3 my-borders mb-3">
+    <div class="col-md-12">
+      <div class="float-left text-uppercase font-weight-bold">Smoking</div>
+      <div class="float-right">
+        <div class="text-muted float-right">
+
+          <div class="text-muted float-right">
+            <span class="pr-1">{{userSmokingAttention}}</span>
+            <span *ngIf="userSmokingAttention.length === 0" (click)="onClickShowAllSmokingAttentions()">Not Selected</span>
+            <img src="../../assets/img-login/next.png" height="18" width="18" (click)="onClickShowAllSmokingAttentions()"/>
+            <div id="addSmoking" class="mb-4 scroll-items" *ngIf="isAddingSmokingAttention" (click)="addSmokingAttention($event)">
+              <div class="hover-set-color pl-2 border-1" *ngFor="let allSmokingAttention of allSmokingAttentions">{{allSmokingAttention}}</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row pt-3 my-borders mb-3">
+    <div class="col-md-12">
+      <div class="float-left text-uppercase font-weight-bold">Drinking</div>
+      <div class="float-right">
+        <div class="text-muted float-right">
+
+          <div class="text-muted float-right">
+            <span class="pr-1">{{userDrinkingAttention}}</span>
+            <span *ngIf="userDrinkingAttention.length === 0" (click)="onClickShowAllDrinkingAttentions()">Not Selected</span>
+            <img src="../../assets/img-login/next.png" height="18" width="18" (click)="onClickShowAllDrinkingAttentions()"/>
+            <div id="addDrinking" class="mb-4 scroll-items" *ngIf="isAddingDrinkingAttention" (click)="addDrinkingAttention($event)">
+              <div class="hover-set-color pl-2 border-1" *ngFor="let allDrinkingAttention of allDrinkingAttentions">{{allDrinkingAttention}}</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {IpService} from "../ip.service";
 
 @Component({
   selector: 'app-user-phone',
@@ -8,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 export class UserPhoneComponent implements OnInit {
 
 
+  setUserPhone(){
+    let inputValue = (<HTMLInputElement>document.getElementById('inputPhone')).value;
+    let selectValue = (<HTMLInputElement>document.getElementById('selectPhoneCode')).value;
+    this.ipService.newUser.phone = selectValue + inputValue;
+    console.log(this.ipService.newUser.phone);
+  }
 
-
-  constructor() { }
+  constructor(private ipService: IpService) { }
 
   ngOnInit() {
   }

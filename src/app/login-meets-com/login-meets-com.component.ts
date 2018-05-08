@@ -44,7 +44,7 @@ export class LoginMeetsComComponent implements OnInit {
 
   ngOnInit() {
     console.log('Init...........');
-    this.ipService.getHero();
+    this.ipService.createNewUser( 'generateHashLink',null,);
   }
 
 }

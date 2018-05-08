@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms'
-import {MatStepperModule} from '@angular/material/stepper';
-import { ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { IpService } from "../ip.service";
+import { Router, Routes, RouterModule } from "@angular/router";
+import { UserPhotoComponent } from "../user-photo/user-photo.component";
+
 
 
 @Component({
@@ -12,28 +13,54 @@ import { ViewChild } from '@angular/core';
 })
 export class CreateAccountComponent implements OnInit {
 
-  isLinear = false;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
 
   emailOrPhone = {
     email: true,
     phone: false,
   };
 
-  @ViewChild('stepper') stepper;
-  @ViewChild('form') form;
+  langs: string[] = [
+    'English',
+    'French',
+    'German',
+  ];
+  myform: FormGroup;
+  firstName: FormControl;
+  lastName: FormControl;
+  email: FormControl;
+  password: FormControl;
+  language: FormControl;
 
-  /**
-   * Changes the step to the index specified
-   * @param {number} index The index of the step
-   */
-  changeStep(index: number) {
-    this.stepper.selectedIndex = index;
+
+
+
+  constructor(router: Router, routerModule: RouterModule, private ipService: IpService) {
+
   }
 
-  constructor(private _formBuilder: FormBuilder) { }
-
+  setPassword(): boolean{
+    let password = (<HTMLInputElement>document.getElementById('inputPassword')).value;
+    let confirmPassword = (<HTMLInputElement>document.getElementById('confirmPassword')).value;
+    if(password === confirmPassword){
+      this.ipService.newUser.password = password;
+      return true;
+    }else{
+      return false;
+    }
+  }
+  clearEmail(){
+    this.ipService.newUser.email = undefined;
+    this.ipService.newUser.password = undefined;
+  }
+  clearPhone(){
+    this.ipService.newUser.phone = undefined;
+  }
+  onChangeSetEmail(event){
+    this.ipService.newUser.email = event.target.value;
+  }
+  onChangeSetPhone(event){
+    this.ipService.newUser.phone = event.target.value;
+  }
 
   showEmail(e){
     this.emailOrPhone.email = true;
@@ -59,14 +86,37 @@ export class CreateAccountComponent implements OnInit {
     buttonEmail.classList.remove('my-button-active');
   }
 
+  createFormControls() {
+    this.firstName = new FormControl('', Validators.required);
+    this.lastName = new FormControl('', Validators.required);
+    this.email = new FormControl('', [
+      Validators.required,
+      Validators.pattern("[^ @]*@[^ @]*")
+    ]);
+    this.password = new FormControl('', [
+      Validators.required,
+      Validators.minLength(8)
+    ]);
+    this.language = new FormControl('', Validators.required);
+  }
 
-  ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
+  createForm() {
+    this.myform = new FormGroup({
+      name: new FormGroup({
+        firstName: this.firstName,
+        lastName: this.lastName,
+      }),
+      email: this.email,
+      password: this.password,
+      language: this.language
     });
   }
+
+
+  ngOnInit() {
+    this.createFormControls();
+    this.createForm();
+  }
+
 
 }

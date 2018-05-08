@@ -59,3 +59,12 @@ html, body{
 .my-bottom{
   padding-bottom: 30px;
 }
+.has-danger {
+  border: 2px solid red;
+  border-radius: 11px;
+}
+
+.has-success {
+  border: 2px solid green;
+  border-radius: 11px;
+}

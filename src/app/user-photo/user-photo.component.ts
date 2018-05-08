@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {IpService} from "../ip.service";
 
 @Component({
   selector: 'app-user-photo',
@@ -13,13 +14,17 @@ export class UserPhotoComponent implements OnInit {
     let target: HTMLInputElement = <HTMLInputElement> eventObj.target;
     let files: FileList = target.files;
     this.file = files[0];
-    console.log(this.file);
-    let img = document.getElementById('userPhoto');
-    console.log(img);
+    let _this = this;
+    let userPhoto = document.getElementById('userPhoto');
+    let imgEditPhoto = document.getElementById('addPhotoImg');
     let reader  = new FileReader();
 
     reader.addEventListener("load", function () {
-      img.setAttribute('src', reader.result);
+      console.log(reader.result);
+      _this.ipService.newUser.photo = reader.result;
+      console.log(_this.ipService.newUser);
+      userPhoto.setAttribute('src', reader.result);
+      imgEditPhoto.setAttribute('src', '../../assets/img-login/edit.png');
     }, false);
 
     if (this.file) {
@@ -27,9 +32,11 @@ export class UserPhotoComponent implements OnInit {
     }
   }
 
+  createNewUser(){
+    this.ipService.createNewUser( '', this.ipService.newUser);
+  }
 
-
-  constructor() { }
+  constructor(private ipService: IpService) { }
 
   ngOnInit() {
   }

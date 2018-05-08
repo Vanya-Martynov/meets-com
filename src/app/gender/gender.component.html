@@ -8,6 +8,9 @@
       mode="determinate"
       value="20">
     </mat-progress-bar>
+    <div class="float-left pt-2">
+      <a routerLink="/verification" class="text-center"><img src="../../assets/img-login/back.png" height="20" width="20"/></a>
+    </div>
     <div class="row">
       <div class="col-md-12 col-xs-12 text-center" >
         <img src="../../assets/img-login/gender_icon.png" class="img-fluid logo-meets text-danger" alt="picture"/></div>
@@ -18,8 +21,8 @@
   </div>
   <div class="container my-padding">
     <div class="row" >
-      <div class="col-md-6"><label class="btn float-right"><img src="../../assets/img-login/male.png" alt="..." class="img-thumbnail img-check my-male-icons"><input type="radio" name="chk1" id="item1" value="val1" class="invisible check" autocomplete="off"></label></div>
-      <div class="col-md-6"><label class="btn float-left"><img src="../../assets/img-login/female.png" alt="..." class="img-thumbnail img-check my-male-icons"><input type="radio" name="chk4" id="item2" value="val4" class="invisible check" autocomplete="off"></label></div>
+      <div class="col-md-6"><label class="btn float-right" (click)="setGenderMale()"><img src="../../assets/img-login/male.png" alt="..." class="img-thumbnail img-check my-male-icons"><input type="radio" name="chk1" id="item1" value="val1" class="invisible check" autocomplete="off"></label></div>
+      <div class="col-md-6"><label class="btn float-left" (click)="setGenderFemale()"><img src="../../assets/img-login/female.png" alt="..." class="img-thumbnail img-check my-male-icons"><input type="radio" name="chk4" id="item2" value="val4" class="invisible check" autocomplete="off"></label></div>
     </div>
   </div >
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {IpService} from "../ip.service";
 
 @Component({
   selector: 'app-user-birthday',
@@ -22,9 +23,10 @@ export class UserBirthdayComponent implements OnInit {
     let timeRightNow = new Date().getTime();
     this.userBirthday.age = Math.round((timeRightNow - userAge)/years);
     this.userBirthday.display = true;
+    this.ipService.newUser.age = inputValue;
   }
 
-  constructor() { }
+  constructor(private ipService: IpService) { }
 
   ngOnInit() {
   }

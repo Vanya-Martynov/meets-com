@@ -8,17 +8,22 @@
     </div>
     <div class="row buttons-email-phone">
       <div class="col-md-6 col-sm-4 col-xs-11">
-        <button class="btn btn-default float-right my-buttons my-button-active" (click)="showEmail($event)" id="buttonEmail"><img src="http://s1.iconbird.com/ico/2013/1/569/w24h16138981479618envelope.png" class="turtle" alt="" > Email</button>
+        <button class="btn btn-default float-right my-buttons my-button-active" (click)="showEmail($event)" (click)="clearPhone()" id="buttonEmail"><img src="http://s1.iconbird.com/ico/2013/1/569/w24h16138981479618envelope.png" class="turtle" alt="" > Email</button>
       </div>
       <div class="col-md-6 col-sm-8 col-xs-1">
-        <button class="btn btn-default my-buttons btn-primary my-button-muted" (click)="showPhone()" id="buttonPhone"><img src="http://s1.iconbird.com/ico/2014/1/622/w26h261390854463phone26.png" class="turtle" alt=""> Phone</button>
+        <button class="btn btn-default my-buttons btn-primary my-button-muted" (click)="showPhone()" (click)="clearEmail()" id="buttonPhone"><img src="http://s1.iconbird.com/ico/2014/1/622/w26h261390854463phone26.png" class="turtle" alt=""> Phone</button>
       </div>
     </div>
   </div>
-  <div class="container">
+  <div class="container" >
     <form>
-      <div class="form-group" *ngIf="emailOrPhone.email">
-        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+      <div class="form-group" *ngIf="emailOrPhone.email" [formGroup]="myform">
+
+        <input type="email" formControlName="email" class="form-control" id="exampleInputEmail1" placeholder="Email" (change)="onChangeSetEmail($event)"
+               [ngClass]="{
+        'has-danger': email.invalid && (email.dirty || email.touched),
+        'has-success': email.valid && (email.dirty || email.touched)}">
+
       </div>
       <div class="row">
         <div class="col-md-2" *ngIf="emailOrPhone.phone">
@@ -29,19 +34,38 @@
             <option>+11</option>
           </select>
         </div>
-        <div class="form-group col-md-10" *ngIf="emailOrPhone.phone">
-          <input type="text" class="form-control" id="inputPhone" placeholder="Phone">
+        <div class="form-group col-md-10" *ngIf="emailOrPhone.phone" [formGroup]="myform">
+          <input type="text" class="form-control" id="inputPhone" placeholder="Phone" formControlName="email" (change)="onChangeSetPhone($event)"
+                 [ngClass]="{
+        'has-danger': email.invalid && (email.dirty || email.touched),
+        'has-success': email.valid && (email.dirty || email.touched)}">
+
         </div>
       </div>
 
-      <div class="form-group" *ngIf="emailOrPhone.email">
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      <div class="form-group" *ngIf="emailOrPhone.email" [formGroup]="myform">
+
+        <input type="password" class="form-control" id="inputPassword" formControlName="password"
+               [ngClass]="{
+        'has-danger': password.invalid && (password.dirty || password.touched),
+        'has-success': password.valid && setPassword() && (password.dirty || password.touched)
+      }" placeholder="Password" (change)="setPassword()">
+
       </div>
-      <div class="form-group" *ngIf="emailOrPhone.email">
-        <input type="password" class="form-control" id="userConfirmPassword" placeholder="Confirm Password">
+      <div class="form-group" *ngIf="emailOrPhone.email" [formGroup]="myform">
+
+        <input type="password" name="confirmPassword" class="form-control" id="confirmPassword"
+               placeholder="Confirm Password" formControlName="password" (change)="setPassword()"
+               [ngClass]="{
+        'has-danger': password.invalid && (password.dirty || password.touched),
+        'has-success': password.valid && setPassword() && (password.dirty || password.touched)
+      }">
+
       </div>
       <button type="button" class="float-right btn btn-link">Forgot your password?</button>
       <div class="clearfix"></div>
+
+
 
     </form>
     <div class="text-center btn-login">

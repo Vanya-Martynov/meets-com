@@ -1,0 +1,133 @@
+.mini-photo{
+  display: flex;
+  height: 120px;
+  width: 120px;
+  border-radius: 5px;
+  background: #ccc;
+  justify-content: center;
+  align-items: center;
+}
+.my-borders{
+  border-top: 1px solid #CCDFEF;
+}
+
+
+.select-style {
+  border: none;
+  width: 120px;
+  border-radius: 13px;
+  overflow: hidden;
+  background: #fafafa url("../../assets/img-login/next.png") no-repeat 90% 40%;
+  background-size: 20px 20px;
+}
+
+.select-style select, .select-style select option {
+  width: 120%;
+  border: none;
+  box-shadow: none;
+  border-radius: 13px;
+  background: transparent;
+  background-image: none;
+  -webkit-appearance: none;
+}
+
+.select-style select:focus {
+  outline: none;
+}
+.noUnderline {
+  text-decoration: none
+}
+
+
+#test{
+  height: 100px;
+  overflow-y: scroll
+}
+
+.hover-set-color:hover{
+  background: #CCDFEF;
+}
+
+.userInterests{
+  background-color: #EE5757;
+  border: 1px solid #33acfe;
+  border-radius: 4px;
+  height: 30px;
+  pointer-events: initial;
+}
+.removeInterest{
+  background: transparent;
+
+}
+.scroll-items{
+  height: 100px;
+  overflow-y: scroll
+}
+
+
+.avatar-pic{
+  width: 150px;
+  height: 150px;
+}
+.btn-file {
+  position: absolute;
+  box-sizing: border-box;
+  z-index: 10;
+  bottom: 30%;
+  right: 14%;
+
+
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}
+#addPhotoImg{
+  height: 39px;
+  width: 39px;
+  background: #33acfe;
+}
+
+
+
+.addPhotoImg{
+  height: 39px;
+  width: 39px;
+  background: #33acfe;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

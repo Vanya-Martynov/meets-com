@@ -13,9 +13,6 @@ export class VerificationComponent implements OnInit {
     phone: false,
   };
   color = 'primary';
-  mode = 'determinate';
-  myValue = 20;
-  bufferValue = 0;
   time = {
     seconds: 15,
   };

@@ -9,6 +9,9 @@
       mode="determinate"
       value="100">
     </mat-progress-bar>
+    <div class="float-left pt-2">
+      <a routerLink="/phone-number" class="text-center"><img src="../../assets/img-login/back.png" height="20" width="20"/></a>
+    </div>
     <div class="row">
       <div class="col-md-12 col-xs-12 text-center" >
         <img src="../../assets/img-login/fotomaker_icon.png" class="img-fluid logo-meets" alt="picture"/></div>
@@ -21,15 +24,15 @@
         <div class="mb-4 text-center">
           <img src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg" class="rounded z-depth-1-half avatar-pic" id="userPhoto">
           <span class="btn btn-default btn-file">
-            <img src="../../assets/img-login/signs.png" height="25" width="25" class="rounded-circle"/><input name="file" type="file" class="input-file" (change)="onChange($event)"/>
+            <img src="../../assets/img-login/signs.png" class="rounded-circle" id="addPhotoImg"/><input name="file" type="file" class="input-file" (change)="onChange($event)"/>
           </span>
         </div>
       </div>
     </form>
-  </div >
+  </div>
   <div class="container fixed-bottom my-bottom">
     <div class="text-center btn-login">
-      <button type="button" class="btn btn-default text-center my-buttons my-button-login" routerLink="/login">Register</button>
+      <button type="button" class="btn btn-default text-center my-buttons my-button-login" routerLink="/login" (click)="createNewUser()">Register</button>
     </div>
     <div class="text-center text-muted">Already have an account? <a routerLink="/login">Login</a></div>
     <div class="container text-center">
