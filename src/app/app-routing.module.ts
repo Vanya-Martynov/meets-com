@@ -12,6 +12,9 @@ import { UserPhoneComponent } from "./user-phone/user-phone.component";
 import { UserPhotoComponent } from "./user-photo/user-photo.component";
 import { EmailLinkComponent } from "./email-link/email-link.component";
 import { ProfileComponent } from "./profile/profile.component";
+import { SomeChatComponent } from "./some-chat/some-chat.component";
+import { UserProfileComponent } from "./user-profile/user-profile.component";
+import {WatchProfileOfSomeBodyComponent} from "./watch-profile-of-some-body/watch-profile-of-some-body.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginMeetsComComponent },
@@ -25,6 +28,16 @@ const routes: Routes = [
   { path: 'photo', component: UserPhotoComponent },
   { path: 'email_verification', component: EmailLinkComponent},
   { path: 'profile', component: ProfileComponent},
+  { path: 'chatTest', component: SomeChatComponent},
+  { path: 'meets', component: UserProfileComponent},
+  {
+    path: 'profile',
+    component: WatchProfileOfSomeBodyComponent,
+    children : [{
+      path: '**',
+      component: WatchProfileOfSomeBodyComponent
+    }]
+  },
 ];
 @NgModule({
   exports: [ RouterModule ],

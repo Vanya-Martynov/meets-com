@@ -1,0 +1,40 @@
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet">
+</head>
+<div class="container">
+  <div class="row text-center">
+    <div class="col-md-12">
+      <div class="header mt-2">
+        <mat-form-field>
+          <input matInput placeholder="Your name here" type="text" [(ngModel)]="sender" [ngModelOptions]="{updateOn: 'blur'}">
+        </mat-form-field>
+      </div>
+      <div #viewer class="body">
+        <div class="viewer" *ngIf="sender">
+          <div class="message text-primary" *ngFor="let msg of serverMessages" [ngClass]="{'bold': msg.isBroadcast, 'others': !isMine(msg)}">
+            <div class="badge text-danger" [style.backgroundColor]="getSenderColor(msg.sender)">{{ getSenderInitials(msg.sender) }}</div>
+            <div class="content text-light" [ngClass]="{'bold': msg.isBroadcast, 'others': !isMine(msg)}">
+              <i *ngIf="msg.isBroadcast" class="material-icons">language</i>
+              <span>{{ msg.content }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="sender" class="footer">
+        <form (submit)="send()">
+          <mat-form-field>
+            <input name="clientMessage" matInput placeholder="Write a message" type="text" [(ngModel)]="clientMessage">
+          </mat-form-field>
+          <button mat-fab type="submit">
+            <i class="material-icons">check_circle_outline</i>
+          </button>
+          <button mat-fab (click)="toggleIsBroadcast()" type="button" [ngClass]="{'disabled': !isBroadcast}">
+            <i class="material-icons">language</i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>

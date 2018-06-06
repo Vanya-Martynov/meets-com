@@ -1,0 +1,70 @@
+.photos-carousel{
+  width: 100%;
+  padding: 0;
+}
+
+img[_ngcontent-c1]{
+  width: 100%;
+}
+.showUserProfile{
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin-top: -10px;
+  background-color: white;
+  border: 1px solid white;
+}
+.navbar-icons {
+  color: #c0c0c0;
+  min-width: 70px;
+}
+.navbar-icons:first-child{
+  min-width: 20px;
+}
+.btn-transperent{
+  background-color: transparent;
+}
+.btn-transperent:focus{
+  outline: none;
+}
+.online-circle{
+  position: absolute;
+  height:15px;
+  width: 15px;
+  background: #00ee00;
+  border-radius: 50%;
+  left: 62px;
+  top: 62px;
+  border: 3px solid white;
+  box-sizing: initial;
+}
+.border-top-bot{
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+}
+
+.border-top-bot .border-bottom{
+  border-bottom: 2px solid blue !important;
+  color: blue !important;
+}
+.special-border{
+  border: 1px solid transparent;
+  border-radius: 10px;
+}
+
+.type-message > *{
+  width: calc(100% - 200px);
+}
+.overflow-y{
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 700px;
+}
+.bg-gray{
+  background: linear-gradient(to top right, #f3f2f5, #e6e5e8);
+}
+.my-width-message{
+  max-width: 250px;
+
+  width: auto;
+  word-break: break-all;
+}

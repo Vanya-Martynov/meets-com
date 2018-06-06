@@ -1,0 +1,225 @@
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+
+<!--
+           HomePage---------------------
+-->
+
+<div class="container" *ngIf="isHomePage">
+  <div class="row bg-primary">
+    <div class="col-md-12 text-white" >
+      <div class="float-left">
+        <i class="material-icons md-light mt-3 mb-3">keyboard_arrow_left</i>
+      </div>
+      <div class="float-right mt-3 mb-3"><i class="material-icons md-light">settings</i></div>
+      <div class="text-center mt-3 mb-3">Nickolas <i class="material-icons md-light">location_on</i></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 text-center photos-carousel">
+      <ngb-carousel *ngIf="images">
+        <ng-template ngbSlide *ngFor="let image of images">
+          <img [src]="image" alt="Random first slide">
+        </ng-template>
+      </ngb-carousel>
+    </div>
+  </div>
+  <div class="row">
+      <div class="col-md-12 text-center showUserProfile">
+        <i class="material-icons md-light md-48">keyboard_arrow_up</i>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn">Edit Profile</button>
+    </div>
+  </div>
+  <div class="row my-borders pt-3 pb-2">
+    <div class="col-md-12 float-left text-uppercase font-weight-bold">About Me</div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="text-muted col-md-12">
+      <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi dignissimos dolorem dolores ea eligendi et, ex expedita, ipsa labore laborum libero perspiciatis provident quidem, rerum sed suscipit vitae? Nesciunt, quod!</span>
+    </div>
+  </div>
+</div>
+
+<!--
+           Chat for Users---------------------
+-->
+
+<div class="container" *ngIf="isMessagePage">
+  <div class="row bg-primary">
+    <div class="col-md-12">
+      <div class="float-left pt-3 pb-3 pr-1">
+        <img src="../../assets/img-chat/coin-stack.png" height="16" width="16"/>
+      </div>
+      <div class="coins text-light pt-3 pb-3 float-left"> {{mcCoins}} mC</div>
+      <div class="float-right pt-3 pb-3">
+        <img src="../../assets/img-chat/man-user.png" height="16" width="16"/>
+      </div>
+      <div class="float-right pt-3 pb-3 pr-2">
+        <img src="../../assets/img-chat/find.png" height="16" width="16"/>
+      </div>
+      <div class="text-center text-light font-weight-bold pt-3 pb-3">Messages</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 pt-3 pb-3">
+      <div class="float-left text-muted font-weight-bold text-uppercase">
+        New Members
+      </div>
+    </div>
+  </div>
+  <div class="row overflow-x" >
+    <div class="col-md-3 col-sm-3 text-center position-relative" *ngFor="let user of allUsers">
+      <a [routerLink]="'/profile/'+user.iduserEditMeetsCom" [queryParams]="{ filter: 'new' }" >
+        <div class="position-relative">
+          <img src="http://content2.latest-hairstyles.com/wp-content/uploads/casual-disconnected-undercut.jpg" class="rounded float-left mr-3" style="width: 80px; height: 80px" alt="">
+          <div class="online-circle"></div>
+        </div>
+      </a>
+      <div class="text-center">{{user.userName}}</div>
+    </div>
+  </div>
+  <div class="row border-top-bot mt-2">
+      <div class="col-md-4 col-sm-4 text-uppercase text-muted">
+        <div class="float-right border-bottom">
+          <button class="btn btn-link text-uppercase text-muted font-weight-bold  pt-3 pb-3">all</button>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-4 ">
+        <div class="text-center">
+          <button class="btn btn-link text-uppercase text-muted font-weight-bold  pt-3 pb-3">online</button>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-4 text-uppercase text-muted">
+        <div class="float-left">
+          <button class="btn btn-link text-uppercase text-muted font-weight-bold  pt-3 pb-3">favorites</button>
+        </div>
+      </div>
+  </div>
+  <div class="row" (click)="showMessenger()">
+    <div class="col-md-12 col-sm-12 position-relative mt-3">
+      <div class="position-relative">
+        <img src="http://content2.latest-hairstyles.com/wp-content/uploads/casual-disconnected-undercut.jpg" class="rounded float-left mr-3" style="width: 80px; height: 80px" alt="">
+        <div class="online-circle"></div>
+      </div>
+      <div class="font-weight-bold">Justin</div>
+      <div class="message text-muted">Lorem ipsum dolor sit amet, consectdus ullam.</div>
+    </div>
+  </div>
+</div>
+
+
+<!--
+                  Messenger -------------
+-->
+
+<div class="container overflow-y" *ngIf="isMessenger" #viewer (scroll)="stopScrolling()">
+  <div class="row bg-primary">
+    <div class="col-md-12 text-white" >
+      <div class="float-left">
+        <i class="material-icons md-light mt-3 mb-3" (click)="showMessagePage()">keyboard_arrow_left</i>
+      </div>
+      <div class="float-right mt-3 mb-3"><i class="material-icons md-light">settings</i></div>
+      <div class="text-center mt-3 mb-3">Nickolas <i class="material-icons md-light">location_on</i></div>
+    </div>
+  </div>
+
+  <div class="row" *ngFor="let doubleArray of allMessages" >
+    <div class="col-md-12 pt-3 float-right" *ngIf="doubleArray.serverMessages.length !== 0">
+      <div class="float-right">
+        <div class="position-relative">
+          <img src="http://content2.latest-hairstyles.com/wp-content/uploads/casual-disconnected-undercut.jpg" class="rounded mr-3" style="width: 40px; height: 40px" alt="">
+        </div>
+      </div>
+      <div class="float-right">
+        <div class="float-right">
+          <div class="my-width-message row " *ngFor="let msg of doubleArray.serverMessages">
+            <div class="text-light float-right col-md-12 w-auto">
+              <div class="bg-primary pt-1 pl-2 pr-2 pb-1 mr-2 mb-3 special-border float-right">{{ msg.content }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 pt-3 float-left" *ngIf="doubleArray.userMessages.length !== 0">
+      <div class="col-md-1">
+        <div class="float-left">
+          <img src="http://content2.latest-hairstyles.com/wp-content/uploads/casual-disconnected-undercut.jpg" class="rounded mr-3" style="width: 40px; height: 40px" alt="">
+        </div>
+      </div>
+      <div class="float-left">
+        <div class="special-border bg-gray">
+          <div class="my-width-message" *ngFor="let msg of doubleArray.userMessages">
+            <div class="text-dark float-left">
+              <div class="bg-gray pt-1 pl-2 pr-2 pb-1 mr-2 mb-3 special-border">{{ msg.content }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row fixed-bottom text-center">
+    <div class="col-md-12 type-message">
+      <form (submit)="send()" class="type-message">
+        <mat-form-field>
+          <input name="clientMessage" matInput placeholder="Write a message" type="text" [(ngModel)]="clientMessage">
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+
+<!--
+                  Navigation-------------
+ -->
+
+<div class="container text-center pl-5" *ngIf="isNavigation">
+  <div class="row fixed-bottom text-center pl-5">
+    <div class="col-md-12 col-xl-12 col-sm-12 text-center pl-5">
+      <nav class="navbar navbar-expand-xs navbar-expand-lg navbar-expand-sm navbar-expand-md navbar-light bg-light text-center">
+        <div class="collapse navbar-collapse text-center" id="navbarNav">
+          <ul class="navbar-nav text-center">
+            <li class="nav-item active pr-5 pl-5 text-center">
+              <button class="btn btn-transperent btn-link" (click)="showMessagePage()">
+                <img src="../../assets/img-chat/chat-icon.png" class="navbar-icons" height="24" width="24"/>
+              </button>
+            </li>
+            <li class="nav-item active text-center">
+              <button class="btn btn-transperent btn-link">
+                <i class="material-icons navbar-icons pl-3 pr-5">group</i>
+              </button>
+            </li>
+            <li class="nav-item text-center">
+              <button class="btn btn-transperent btn-link" (click)="showHomePage()">
+                <mat-icon class="navbar-icons pl-2 pr-5">home</mat-icon>
+              </button>
+            </li>
+            <li class="nav-item text-center">
+              <button class="btn btn-transperent btn-link pl-5">
+                <img src="../../assets/img-chat/plane.png" class="navbar-icons" height="24" width="24"/>
+              </button>
+            </li>
+            <li class="nav-item text-center">
+              <button class="btn btn-transperent btn-link">
+                <i class="material-icons navbar-icons pl-5 ">notifications</i>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>

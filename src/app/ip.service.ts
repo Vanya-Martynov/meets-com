@@ -22,6 +22,14 @@ export class IpService {
 
   }
 
+  editTest(url, someData, callback: any): void{
+    let request = this.http.post(this.httpURL + url, someData)
+      .subscribe(data=>{
+        callback(data);
+      }, err =>{
+        console.log(err)
+      })
+  }
   createNewUser(url, someData):void {
     let request = this.http.post(this.httpURL + url, someData)
       .subscribe(data=>{

@@ -5,6 +5,7 @@ import {FormControl} from '@angular/forms';
 import {MatAutocompleteSelectedEvent, MatChipInputEvent} from '@angular/material';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import {IpService} from "../ip.service";
 
 @Component({
   selector: 'app-profile',
@@ -12,8 +13,6 @@ import {map, startWith} from 'rxjs/operators';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-
-  name = 'Not Selected';
 
   userBiography = 'Some info about user';
 
@@ -28,7 +27,6 @@ export class ProfileComponent implements OnInit {
   isAddingHairColor = false;
   isAddingSmokingAttention = false;
   isAddingDrinkingAttention = false;
-
 
   allLanguages = [
     'German',
@@ -125,7 +123,7 @@ export class ProfileComponent implements OnInit {
     'very positive',
   ];
 
-
+  name = 'Not Selected';
   userInterests = [];
   userLanguages = [];
   userHeight:string = '';
@@ -137,7 +135,27 @@ export class ProfileComponent implements OnInit {
   userDrinkingAttention:string = '';
   userPhotos = [];
 
+  sendToServer = {
+    userPhotos: this.userPhotos,
+    userBiography: this.userBiography,
+    userName: this.name,
+    userHeight: this.userHeight,
+    userLanguages: this.userLanguages,
+    userInterests: this.userInterests,
+    userWeight: this.userWeight,
+    userBodyType: this.userBodyType,
+    userHairColor: this.userHairColor,
+    userEyeColor: this.userEyeColor,
+    userSmokingAttention: this.userSmokingAttention,
+    userDrinkingAttention: this.userDrinkingAttention,
+  };
+
   file: File;
+  editProfile(){
+    this.ipService.editTest('editProfile', this.sendToServer, function (data) {
+      console.log(data);
+    });
+  }
 
   onClickShowInputBiography(){
     this.isChangingBiography = true;
@@ -168,6 +186,7 @@ export class ProfileComponent implements OnInit {
   }
   onClickShowAllHairColors(){
     this.isAddingHairColor = true;
+    console.log(this.sendToServer)
   }
   onClickShowAllSmokingAttentions(){
     this.isAddingSmokingAttention = true;
@@ -179,11 +198,13 @@ export class ProfileComponent implements OnInit {
   onChangeUserBiography(){
     this.userBiography = (<HTMLInputElement>document.getElementById('userBiography')).value;
     this.isChangingBiography = false;
+    this.sendToServer.userBiography = this.userBiography;
   }
 
   onChangeName(){
     this.name = (<HTMLInputElement>document.getElementById('changeName')).value;
     this.isChangingName = false;
+    this.sendToServer.userName = this.name;
   }
 
   addInterest(event){
@@ -193,6 +214,7 @@ export class ProfileComponent implements OnInit {
           interest: value,
           indexInAllInterests: index,
         });
+        this.sendToServer.userInterests = this.userInterests;
         this.allInterests.splice(index, 1);
         this.isAddingInterests = false;
       }
@@ -205,9 +227,11 @@ export class ProfileComponent implements OnInit {
           language: value,
           indexInAllLanguages: index,
         });
+        this.sendToServer.userLanguages = this.userLanguages;
         this.allLanguages.splice(index, 1);
         this.isAddingLanguage = false;
       }
+
     });
   }
   addHeight(event){
@@ -217,6 +241,7 @@ export class ProfileComponent implements OnInit {
       if(value === height){
         this.userHeight = value;
         this.isAddingHeight = false;
+        this.sendToServer.userHeight = this.userHeight;
       }
     });
   }
@@ -227,6 +252,7 @@ export class ProfileComponent implements OnInit {
       if(value === weight){
         this.userWeight = value;
         this.isAddingWeight = false;
+        this.sendToServer.userWeight = this.userWeight;
       }
     });
   }
@@ -236,6 +262,7 @@ export class ProfileComponent implements OnInit {
       if(value === bodyType){
         this.userBodyType = value;
         this.isAddingBodyType = false;
+        this.sendToServer.userBodyType = this.userBodyType;
       }
     });
   }
@@ -246,6 +273,7 @@ export class ProfileComponent implements OnInit {
       if(value === eyeColor){
         this.userEyeColor = value;
         this.isAddingEyeColor = false;
+        this.sendToServer.userEyeColor = this.userEyeColor;
       }
     });
   }
@@ -256,6 +284,7 @@ export class ProfileComponent implements OnInit {
       if(value === hairColor){
         this.userHairColor = value;
         this.isAddingHairColor = false;
+        this.sendToServer.userHairColor = this.userHairColor;
       }
     });
   }
@@ -266,6 +295,7 @@ export class ProfileComponent implements OnInit {
       if(value === smoking){
         this.userSmokingAttention = value;
         this.isAddingSmokingAttention = false;
+        this.sendToServer.userSmokingAttention = this.userSmokingAttention;
       }
     });
   }
@@ -276,6 +306,7 @@ export class ProfileComponent implements OnInit {
       if(value === drinking){
         this.userDrinkingAttention = value;
         this.isAddingDrinkingAttention = false;
+        this.sendToServer.userDrinkingAttention = this.userDrinkingAttention;
       }
     });
   }
@@ -288,6 +319,7 @@ export class ProfileComponent implements OnInit {
     this.userInterests.forEach((value, index)=>{
       if(value.interest === interest){
         this.userInterests.splice(index, 1);
+        this.sendToServer.userInterests.splice(index, 1);
       }
     });
     event.target.remove();
@@ -300,6 +332,7 @@ export class ProfileComponent implements OnInit {
     this.userLanguages.forEach((value, index)=>{
       if(value.language === language){
         this.userLanguages.splice(index, 1);
+        this.sendToServer.userLanguages.splice(index, 1);
       }
     });
   }
@@ -315,9 +348,16 @@ export class ProfileComponent implements OnInit {
     let reader  = new FileReader();
 
     reader.addEventListener("load", function () {
-      //_this.ipService.newUser.photo = reader.result;
-      //console.log(_this.ipService.newUser);
       _this.userPhotos.unshift(reader.result);
+      _this.sendToServer.userPhotos = _this.userPhotos;
+      let typeArr = Int16Array.from(reader.result);
+      let blob = new Blob([typeArr], {type: 'application/octet-stream'}); // pass a useful mime type here
+      let url = window.URL.createObjectURL(blob);
+      console.log(url);
+      let testImg = document.createElement('img');
+      testImg.src = url;
+      document.getElementById('mydiv').appendChild(testImg);
+
     }, false);
 
     if (this.file) {
@@ -325,12 +365,58 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  constructor() {
+  constructor(private ipService: IpService) {
 
   }
 
 
   ngOnInit() {
+    let _this = this;
+    this.ipService.editTest('getUserData', null, function (data) {
+      console.log(data);
+      _this.userHeight = data.userHeight;
+      _this.userWeight = data.userWeight;
+      _this.userEyeColor = data.userEyeColor;
+      _this.userBodyType = data.userBodyType;
+      _this.userHairColor = data.userHairColor;
+      _this.userSmokingAttention = data.userSmokingAttention;
+      _this.userDrinkingAttention = data.userDrinkingAttention;
+      _this.name = data.userName;
+      _this.userInterests = data.userInterests;
+      _this.userLanguages = data.userLanguages;
+      _this.userPhotos = data.userPhotos;
+      _this.sendToServer = {
+        userPhotos: _this.userPhotos,
+        userBiography: _this.userBiography,
+        userName: _this.name,
+        userHeight: _this.userHeight,
+        userLanguages: _this.userLanguages,
+        userInterests: _this.userInterests,
+        userWeight: _this.userWeight,
+        userBodyType: _this.userBodyType,
+        userHairColor: _this.userHairColor,
+        userEyeColor: _this.userEyeColor,
+        userSmokingAttention: _this.userSmokingAttention,
+        userDrinkingAttention: _this.userDrinkingAttention,
+      };
+      _this.userLanguages.forEach((value)=>{
+        let userLanguage = value.language;
+        _this.allLanguages.forEach((value,index)=>{
+          if (value === userLanguage){
+            _this.allLanguages.splice(index, 1);
+          }
+        })
+      });
+      _this.userInterests.forEach((value, index)=>{
+        let userInterest = value.interest,
+          indexToSplice = index;
+        _this.allInterests.forEach((value,index)=>{
+          if (value === userInterest){
+            _this.allInterests.splice(index, 1);
+          }
+        })
+      });
+    });
   }
 
 }
