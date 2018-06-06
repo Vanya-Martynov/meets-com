@@ -1,0 +1,36 @@
+
+let mysql = require('promise-mysql');
+let selectFromDB = 'id, login, password, name, email, birthday, country, city, school, role';
+
+function createHistory(req, res, next){
+    mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '123123123',
+        database: 'data_base_server'
+    }).then(function(conn){
+        let result = conn.query(`INSERT INTO chat_history 
+                (
+                    firstUserHash,               
+                    secondUserHash,                
+                    history
+                )
+                 VALUES (
+                    '${req.body.firstUserHash}',
+                    '${req.body.secondUserHash}',
+                    '${JSON.stringify(req.body.history)}'
+                 )`);
+//${req.body.history}
+        return conn
+    }).then(function (conn) {
+        conn.query(`SELECT * FROM chat_history`, function (err, result, fields) {
+            result[result.length - 1].history = JSON.parse(result[result.length - 1].history);
+            res.send(result);
+        });
+        conn.end();
+        next();
+    });
+}
+
+
+module.exports.createHistory = createHistory;

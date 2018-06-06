@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="js/main.js" defer></script>
+    <link rel="import" href="../front_end/htmlFiles/mainApp.html">
+    <link rel="import" data-value="importAddNewUserHTML" href="../front_end/htmlFiles/addNewUser.html">
+</head>
+<body>
+    <div id="authorizationWindow">
+        <form action="" id="userLoginForm">
+            <input type="text" class="userInfo" value="Login" id="login">
+            <input type="password" class="userInfo" placeholder="Password" id="password">
+            <input type="text" class="userInfo" value="Name" id="userName">
+            <input type="text" class="userInfo" value="mail@mail.ru" id="userEmail">
+            <input type="date" class="userInfo" id="userBirthday" placeholder="Your birthday" id="userBirthday">
+            <select name="getRole" id="role">
+                <option value="Admin">Admin</option>
+                <option value="User">User</option>
+                <option value="Guest">Guest</option>
+            </select>
+        </form>
+        <button type="button" class="buttonSubmit" id="submit">Sign In</button>
+    </div>
+    <div id="test"></div>
+</body>
+</html>
